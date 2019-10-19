@@ -4,7 +4,7 @@
     <q-list bordered class="rounded-borders" style="max-width: 600px" >
       <q-item-label header>
         
-        <q-btn color="blue" icon="add_box"  label="admin" class="sp" size="sm" @click="dialog=true"/>
+        <q-btn color="blue" icon="add_box"  label="admin" class="sp" size="sm" @click="add()"/>
         
       </q-item-label>
         
@@ -48,7 +48,7 @@
         <q-item-section top>
           <q-item-label lines="1">
            
-              <q-btn class="gt-xs" size="12px" flat dense round icon="edit" @click="Edit(admin)"/>
+              <q-btn class="gt-xs" size="12px" flat dense round icon="edit" @click="edit(admin)"/>
               <q-btn class="gt-xs" size="12px" flat dense round icon="delete" @click="onDelete(admin.id)" />
               <q-btn size="12px" flat dense round icon="more_vert" />
             
@@ -82,7 +82,7 @@
           >
             <q-input
               filled
-              v-model="username"
+              v-model="form.username"
               label="Your name *"
               hint="Name and surname"
               lazy-rules
@@ -92,7 +92,7 @@
             <q-input
               filled
               type="password"
-              v-model="password"
+              v-model="form.password"
               label="Your password "
               lazy-rules
               :rules="[
@@ -102,8 +102,10 @@
 
             <!-- Button awal -->
             <div>
-              <q-btn flat label="Add" type="submit" color="primary" v-close-popup />
+              <q-btn flat label="Add" type="submit" color="primary" v-close-popup v-show="!updateSubmit"/>
+              <q-btn flat label="Update" type="button" color="primary" v-close-popup v-show="updateSubmit" @click="update(form)"/>
               <q-btn flat label="Cancel" color="primary" v-close-popup="cancelEnabled" :disable="!cancelEnabled" />
+            
             </div>
             <!-- Button akhir -->
 
@@ -126,13 +128,17 @@ export default {
   data () {
     return {
       current: 3,
+      updateSubmit: false,
       dialog : false,
       cancelEnabled: false,
       admin2: [
         { }
       ],
-      username : '',
-      passwor : ''
+      form:{
+        id : '',
+        username : '',
+        passwor : ''
+      }
     }
   },
 
@@ -169,11 +175,16 @@ export default {
       console.log("delete called");
       }
     },
+    add(){
+      this.dialog=true
+      this.updateSubmit= false
+
+    },
     
     // method untuk Tambah data
     onSubmit(){
       const self=this
-      admins.postAdmin(window, self.username, self.password
+      admins.postAdmin(window, self.form.username, self.form.password
     )
       .then(function(result)
         {
@@ -182,7 +193,20 @@ export default {
       .catch(function(err){
         console.log(err);
       });
-    }
+    },
+
+    edit(admin){
+        try {
+            this.dialog=true
+            this.updateSubmit= true
+            this.form.id=admin.id
+            this.form.username=admin.username
+            this.form.password=admin.password
+        } catch (error) {
+            console.log(error.message)
+        }
+      
+    },
   }
   
 }

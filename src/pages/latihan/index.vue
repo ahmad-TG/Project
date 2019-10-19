@@ -135,7 +135,6 @@ export default {
       if (confirm('Apakah anda yakin akan menghapus data ini ?')){
       admins.deleteAdmin(window, id)
       .then((res)=>{
-                //  this.posts = res.data;
         admins.getAdmin(window)
         .then((res)=>{
                this.admin2=res.data
@@ -152,6 +151,7 @@ export default {
       console.log("delete called");
       }
     },
+    
     // method untuk Tambah data
     onSubmit(){
       const self=this

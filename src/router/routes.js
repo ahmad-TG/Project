@@ -64,7 +64,8 @@ const routes = [
     component: () => import('layouts/MyLayout.vue'),
     children: [
       { path: 'home', component: () => import('pages/home/index.vue') },
-      { path: 'apah', component: () => import('pages/latihan/index.vue') }    
+      { path: 'apah', component: () => import('pages/latihan/index.vue') },
+      { path: 'update', component: () => import('pages/latihan/update.vue') }  
     ]
   }
 ]
