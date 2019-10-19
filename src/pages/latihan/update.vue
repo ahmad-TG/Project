@@ -107,7 +107,9 @@ export default {
         console.log(err);
       });
     },
+    // method untuk edit data
     edit(admin){
+        
         try {
             this.updateSubmit= true
             this.form.id=admin.id
@@ -119,6 +121,7 @@ export default {
         }
       
     },
+    // method untuk Update data
      update(form){ 
             return axios.put('http://localhost:3000/admins/' + form.id , {
             username: this.form.username,

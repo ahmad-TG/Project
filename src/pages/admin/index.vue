@@ -104,7 +104,7 @@
             <div>
               <q-btn flat label="Add" type="submit" color="primary" v-close-popup v-show="!updateSubmit"/>
               <q-btn flat label="Update" type="button" color="primary" v-close-popup v-show="updateSubmit" @click="update(form)"/>
-              <q-btn flat label="Cancel" color="primary" v-close-popup="cancelEnabled" :disable="!cancelEnabled" />
+              <q-btn flat label="Cancel" color="primary" v-close-popup="cancelEnabled" @click="batal()" />
             
             </div>
             <!-- Button akhir -->
@@ -196,6 +196,7 @@ export default {
     },
 
     edit(admin){
+       if (confirm('Anda akan di alihkan ke halaman Edit data, Tekan OK untuk lanjut atau Batal untuk kembali')){
         try {
             this.dialog=true
             this.updateSubmit= true
@@ -205,8 +206,14 @@ export default {
         } catch (error) {
             console.log(error.message)
         }
+       }
       
     },
+    batal(){
+      if (confirm('Apakah Anda yakin ingin keluar proses ini !!!')){
+      this.dialog=false
+      }
+    }
   }
   
 }
