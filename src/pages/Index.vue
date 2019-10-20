@@ -1,37 +1,50 @@
 quasar
 <template>
-
   <div class="row">
     <div id="form" class="q-mx-auto" style="max-width: 400px">
-      <q-form
-        @submit="onSubmit"
-        class="q-gutter-md"
-      >
-        <q-input
-          filled
-          v-model="username"
-          label="Your name *"
-          hint="Name and surname"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Please type something']"
-        />
+      <q-card style="width :350px" >
+        <q-form  @submit="onSubmit" >
+          <q-bar>
+            <q-icon name="eva-lock-outline" />
+            <div>Otentikasi User</div>
+          </q-bar>
 
-        <q-input
-          filled
-          type="password"
-          v-model="password"
-          label="Your password "
-          lazy-rules
-          :rules="[
-            val => val !== null && val !== '' || 'Please enter your password',
-          ]"
-        />
+          <q-card-section>
+              <q-input outlined 
+              v-model="username" 
+              label="username"
+              type="text" 
+              placeholder="Masukan username" 
+              hint=""
+              :rules="[
+                val =>!!val || 'username di perlukan'
+              ]"/>
+          </q-card-section>
 
-        <div>
-          <q-btn label="Login" type="submit" color="primary"/>
-          
-        </div>
-      </q-form>
+          <q-card-section>
+              <q-input outlined 
+              v-model="password" 
+              label="Password"
+              type="password" 
+              placeholder="Masukan password" 
+              hint=""
+              :rules="[
+                val =>!!val || 'password di perlukan'
+            ]"/>
+          </q-card-section>
+
+          <q-card-section>
+              <q-btn
+                  push 
+                  color="primary"
+                  label="Simpan"
+                  class ="full-width"
+                  size="lg"
+                  type="submit"
+              />
+          </q-card-section>
+        </q-form>
+      </q-card>
     </div>
   </div>
 </template>
@@ -49,7 +62,7 @@ quasar
 </style>
 
 <script>
-import login_api from '../api/admin/index';
+import login_api from '../api/login/index';
 
 export default {
 

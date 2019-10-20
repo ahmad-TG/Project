@@ -39,8 +39,8 @@
 </template>
 
 <script>
-import admins from '../../api/admin/index';
 import axios from 'axios'
+import admins from '../../api/admin/index';
 export default {
   data () {
     return {
@@ -54,8 +54,7 @@ export default {
             id :'',
             username : '',
             password : ''
-          }
-      
+          }     
       
     }
   },
@@ -109,35 +108,41 @@ export default {
     },
     // method untuk edit data
     edit(admin){
-        
+         
         try {
             this.updateSubmit= true
             this.form.id=admin.id
             this.form.username=admin.username
             this.form.password=admin.password
-            console.log(form.username)
+            
         } catch (error) {
             console.log(error.message)
         }
+        
       
     },
     // method untuk Update data
-     update(form){ 
-            return axios.put('http://localhost:3000/admins/' + form.id , {
-            username: this.form.username,
-            password: this.form.password
-            }).then(res => {
-            this.load()
-            this.form.id = ''
-            this.form.username = ''
-            this.form.password
-            this.updateSubmit = false
-                }).catch((err) => {
-                    console.log(err);
+      update(id){ 
+        try {
+          
+          console.log(id)
+            axios.put('http://localhost:3000/api/admins/'+ this.form.id , {
+            username : this.form.username,
+            password : this.form.password
             })
+            .then(res=>{
+              console.log(res.data)
+            });
+            
+        } catch (error) {
+            console.log(error.message)
         }
-  }
+      }
+  },
+  
+  
 }
+
 </script>
 
 <style>

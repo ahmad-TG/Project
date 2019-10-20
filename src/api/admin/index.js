@@ -13,7 +13,7 @@ export default {
     },
     postAdmin(window, username, password){
         return getApiNoAuth()
-        .post('/admins',{
+        .post('/admins/' ,{
             username : username,
             password : password
         })
@@ -27,6 +27,19 @@ export default {
     deleteAdmin(window, id){
         return getApiNoAuth()
         .delete('/admins/'.concat(id))
+        .then(function(response){
+            console.log(response)
+            return response.data
+        }).catch(function(err){
+            console.log(err)
+        })
+    },
+    putAdmin(window, id, username, password){
+        return getApiNoAuth()
+        .put('/admins/'+id ,{
+            username : username,
+            password : password
+        })
         .then(function(response){
             console.log(response)
             return response.data

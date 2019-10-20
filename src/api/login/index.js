@@ -3,7 +3,7 @@ import { getApiNoAuth } from '../utils'
 export default {
     userLogin(window, username, password){
         return getApiNoAuth()
-        .post('/Users/login',{
+        .post('/admins',{
             username : username,
             password : password
         })

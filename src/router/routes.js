@@ -1,7 +1,7 @@
 
 const routes = [
   {
-    // default
+    // Login
     path: '/',
     component: () => import('pages/Index.vue'),
     
@@ -50,22 +50,15 @@ const routes = [
   },
   
   {
-    // login
-    path: '/',
-    component: () => import('layouts/Auth.vue'),
-    children: [
-      { path: 'login', component: () => import('pages/login/index.vue') }
-    ]
-  },
-
-  {
-    // home
+    // Testing
     path: '/',
     component: () => import('layouts/MyLayout.vue'),
     children: [
       { path: 'home', component: () => import('pages/home/index.vue') },
       { path: 'apah', component: () => import('pages/latihan/index.vue') },
-      { path: 'update', component: () => import('pages/latihan/update.vue') }  
+      { path: 'update', component: () => import('pages/latihan/update.vue') } ,
+      { path: 'coba', component: () => import('pages/latihan/coba.vue') } ,
+      { path: 'coba2', component: () => import('pages/admin/lathan.vue') } 
     ]
   }
 ]

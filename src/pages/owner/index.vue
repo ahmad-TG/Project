@@ -6,7 +6,6 @@
         <q-btn color="blue" icon="add_box"  label="admin" class="sp" />
     </router-link>
 
-
     <q-table
       :data="admin"
       :columns="columns"
@@ -25,6 +24,7 @@ import axios from 'axios'
 export default {
   data () {
     return {
+      input :'',
       columns: [
         {
           name: 'nama_owner',
@@ -72,9 +72,7 @@ export default {
         }
          ],
       admin: [
-        {
-          
-        }
+        {  }
       ]
     }
   },
@@ -83,7 +81,7 @@ export default {
     this.admin=response.data
   },
   methods :{
-
+  
   }
 }
 </script>
