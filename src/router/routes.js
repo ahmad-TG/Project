@@ -6,6 +6,12 @@ const routes = [
     component: () => import('pages/Index.vue'),
     
   },
+  {
+    // Login
+    path: '/tmp',
+    component: () => import('layouts/Auth.vue'),
+    
+  },
 
   {
     // Employee
@@ -23,7 +29,8 @@ const routes = [
     path: '/',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: 'admin', component: () => import('pages/admin/index.vue') }
+      { path: 'admin', component: () => import('pages/admin/index.vue') },
+      { path: 'admin2', component: () => import('pages/admin/lathan.vue') }
     ]
   },
 
@@ -54,7 +61,7 @@ const routes = [
     path: '/',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: 'home', component: () => import('pages/home/index.vue') },
+      { path: 'home', component: () => import('pages/home/index.vue')  },
       { path: 'apah', component: () => import('pages/latihan/index.vue') },
       { path: 'update', component: () => import('pages/latihan/update.vue') } ,
       { path: 'coba', component: () => import('pages/latihan/coba.vue') } ,
@@ -62,6 +69,7 @@ const routes = [
     ]
   }
 ]
+          
 
 // Always leave this as last one
 if (process.env.MODE !== 'ssr') {

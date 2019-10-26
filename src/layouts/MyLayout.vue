@@ -5,7 +5,7 @@
       <q-header elevated class="bg" > 
         <q-toolbar >
           <q-btn
-          id="hiden"
+          id=""
           flat
           dense
           round
@@ -20,7 +20,7 @@
           <!-- Akhir  toolbar -->
 
           <!-- Awal Menu Atas -->
-            <q-tabs id="menu">
+            <q-tabs id="menu" class="q-mx-auto">
               <q-route-tab v-for="nav in navs" :key="nav.id" :to="nav.to" :label="nav.label" />
             </q-tabs>
           <!-- Akhir Menu Atas -->
@@ -65,13 +65,13 @@
 
 <style>
 /* untuk hidden manu ketika lebar layar melebihi 768px */
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 510px) {
     #menu { 
       display: none;
     }
   }
 /* untuk hidden Text kuasar pada header ketika lebar layar kurang 768px */
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 510px) {
     #hiden {
       display: none;
     }
@@ -119,6 +119,7 @@ export default {
         }
       ]
     }
+    
   }
 }
 </script>

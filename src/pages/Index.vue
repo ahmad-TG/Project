@@ -1,7 +1,8 @@
 quasar
 <template>
+<q-card class="my-card text-white m" style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)">
   <div class="row">
-    <div id="form" class="q-mx-auto" style="max-width: 400px">
+    <div id="form" class="q-mx-auto " style="max-width: 400px">
       <q-card style="width :350px" >
         <q-form  @submit="onSubmit" >
           <q-bar>
@@ -47,6 +48,7 @@ quasar
       </q-card>
     </div>
   </div>
+</q-card>
 </template>
 
 <style scoped>
@@ -57,6 +59,9 @@ quasar
     margin: auto; */
     margin-top: 15%; 
 
+  }
+  .m {
+    height: 730px;
   }
   
 </style>
@@ -83,7 +88,7 @@ export default {
         {
             console.log(result)
             if(result){
-              self.$router.push('/home')
+                self.$router.go('/home')
             }
         })
       .catch(function(err){

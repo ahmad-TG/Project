@@ -46,5 +46,15 @@ export default {
         }).catch(function(err){
             console.log(err)
         })
+    },
+    getAdminByName(window, username){
+        return getApiNoAuth()
+        .get('admins/getAdminByName?username='+username)
+        .then(function(response){
+            // console.log(response)
+            return response
+        }).catch(function(err){
+            console.log(err)
+        })
     }
 }

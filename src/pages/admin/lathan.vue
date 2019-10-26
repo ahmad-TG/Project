@@ -1,6 +1,99 @@
 <template>
-    
+<div class="q-pa-md">
+    <div class="row">
+        <div class="col" style="align : center">
+            <!-- Qlist awal -->
+            <q-list bordered class="rounded-borders q-mx-auto " style="max-width: 400px">
+                <q-item-label header>
+                    <q-btn color="blue" icon="add_box" label="admin" class="sp" size="sm" @click="add()" />
+                    <input type="text" v-model="find_name">
+                    <q-btn color="blue" icon="search" label="search" class="sp" size="sm" @click="findByName()" />
+                </q-item-label>
+
+                <q-item class="bg-teal">
+                    <q-item-section avatar top class="col-1 gt-xm" style="align : center">
+                        <q-item-label class="q-mt-sm">No</q-item-label>
+                    </q-item-section>
+
+                    <q-item-section top class="col-3 gt-xm" style="align : center">
+                        <q-item-label class="q-mt-sm">Username</q-item-label>
+                    </q-item-section>
+
+                    <q-item-section top class="col-3 gt-xm" style="align : center">
+                        <q-item-label class="q-mt-sm">Password
+                        </q-item-label>
+                    </q-item-section>
+
+                    <q-item-section top class="col-4 gt-xm">
+                        <q-item-label class="q-mt-sm flex flex-center">Aksi
+                        </q-item-label>
+                    </q-item-section>
+                </q-item>
+
+                <!-- Tabel -->
+                <q-item v-for="(admin, index ) in  admin2" :key="admin.id" class="bg-grey-3" line="1">
+                    <q-item-section avatar top class="col-1 gt-xm">
+                        <q-item-label class="q-mt-sm">{{index+1}}</q-item-label>
+                    </q-item-section>
+
+                    <q-item-section top class="col-3 gt-xm">
+                        <q-item-label class="q-mt-sm">{{admin.username}}</q-item-label>
+                    </q-item-section>
+
+                    <q-item-section top class="col-3 gt-xm">
+                        <q-item-label class="q-mt-sm">{{admin.password}}</q-item-label>
+                    </q-item-section>
+
+                    <q-item-section top class="col-4 gt-xm flex flex-center">
+                        <q-item-label lines="1">
+
+                            <q-btn size="12px" flat dense round icon="edit" @click="edit(admin)" />
+                            <q-btn size="12px" flat dense round icon="delete" @click="onDelete(admin.id)" />
+                            <q-btn size="12px" flat dense round icon="more_vert" />
+
+                        </q-item-label>
+                    </q-item-section>
+                </q-item>
+            </q-list>
+            <!-- Qlist akhir -->
+
+            <!-- Form popup awal  -->
+            <q-dialog v-model="dialog" persistent>
+                <q-card>
+                    <q-card-section>
+                        <div id="form" class="q-mx-auto" style="max-width: 400px">
+                            <q-form @submit="onSubmit" class="q-gutter-md">
+                                <q-input filled v-model="form.username" label="Your name *" hint="Name and surname" lazy-rules :rules="[ val => val && val.length > 0 || 'Please type something']" />
+
+                                <q-input filled type="password" v-model="form.password" label="Your password " lazy-rules :rules="[
+                val => val !== null && val !== '' || 'Please enter your password',
+              ]" />
+
+                                <!-- Button awal -->
+                                <div>
+                                    <q-btn flat label="PANGERAN ZAKY" type="submit" color="primary" v-close-popup v-show="!updateSubmit" />
+                                    <q-btn flat label="Update" type="button" color="primary" v-close-popup v-show="updateSubmit" @click="update(form)" />
+                                    <q-btn flat label="Cancel" color="primary" v-close-popup="cancelEnabled" @click="batal()" />
+
+                                </div>
+                                <!-- Button akhir -->
+
+                            </q-form>
+                        </div>
+                    </q-card-section>
+                </q-card>
+            </q-dialog>
+            <!-- Form popup akhir  -->
+
+        </div>
+    </div>
+</div>
 </template>
+
+<style lang="sass" scoped>
+    .row > div
+      padding: 5px 7px
+</style>
 
 <script>
 import admins from '../../api/admin/index';
@@ -12,12 +105,13 @@ export default {
             updateSubmit: false,
             dialog: false,
             cancelEnabled: false,
-            admin2: [{}],
+            admin2: [],
             form: {
                 id: '',
                 username: '',
                 passwor: ''
-            }
+            },
+            find_name : ''
         }
     }, 
 
@@ -27,12 +121,13 @@ export default {
         admins.getAdmin(window) 
             {
                 this.admin2 = response
+                console.log(response)
             }
         },
 
     methods: {
 
-        // Method untuk delete data By ID
+        // Method uquasar devntuk delete data By ID
         onDelete(id) {
             if (confirm('Apakah anda yakin akan menghapus data ini ?')) {
                 admins.deleteAdmin(window, id)
@@ -103,6 +198,18 @@ export default {
             .catch(function (err) {
                 console.log(err);
             });
+        },
+        // method FindByName
+        findByName(find_name) {
+            try {
+                const self = this
+                admins.getAdminByName(window, self.find_name )
+                .then(function (result){
+                return  self.admin2=result.data
+            })
+            } catch (error) {
+                console.log(error.message);
+            }
         }
     }
 }

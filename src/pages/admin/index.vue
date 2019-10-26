@@ -69,7 +69,7 @@
 
                                 <!-- Button awal -->
                                 <div>
-                                    <q-btn flat label="Add" type="submit" color="primary" v-close-popup v-show="!updateSubmit" />
+                                    <q-btn flat label="PANGERAN ZAKY" type="submit" color="primary" v-close-popup v-show="!updateSubmit" />
                                     <q-btn flat label="Update" type="button" color="primary" v-close-popup v-show="updateSubmit" @click="update(form)" />
                                     <q-btn flat label="Cancel" color="primary" v-close-popup="cancelEnabled" @click="batal()" />
 
@@ -123,7 +123,7 @@ export default {
 
     methods: {
 
-        // Method untuk delete data By ID
+        // Method uquasar devntuk delete data By ID
         onDelete(id) {
             if (confirm('Apakah anda yakin akan menghapus data ini ?')) {
                 admins.deleteAdmin(window, id)
